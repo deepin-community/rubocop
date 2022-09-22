@@ -1,0 +1,189 @@
+rubocop (0.89.1+dfsg-3) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>  Fri, 22 Jul 2022 17:19:57 +0800
+
+rubocop (0.89.1+dfsg-3) unstable; urgency=medium
+
+  * Team upload.
+  * d/control (Build-Depends): Raise rubocop-ast version.
+  * d/patches/08-simplify-style-mixinusage.patch: Adjust.
+    - Raise rubocop-ast version accordingly.
+
+ -- Daniel Leidert <dleidert@debian.org>  Thu, 09 Dec 2021 17:13:37 +0100
+
+rubocop (0.89.1+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  * d/patches/08-simplify-style-mixinusage.patch: Add.
+    - Backport patch to fix MixinUsage with new parser version. 
+  * d/patches/09-skip-failing-test.patch: Add patch.
+    - Temporarily skip last failing test.
+  * d/patches/series: Add new patch.
+
+ -- Daniel Leidert <dleidert@debian.org>  Wed, 08 Dec 2021 20:50:38 +0100
+
+rubocop (0.89.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 0.89.1+dfsg
+  * Bump debhelper-compat to 13
+  * Add myself as an uploader
+  * Tighten dependency on rubocop-ast
+
+ -- Utkarsh Gupta <utkarsh@debian.org>  Wed, 19 Aug 2020 11:13:06 +0530
+
+rubocop (0.88.0+dfsg-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 0.88.0+dfsg
+  * debian/control: update dependencies
+  * Refresh patches
+    - Dropped: 01-relax-dependency-version.diff and
+      06-Require-rexml-only-for-ruby2.7.patch, not necessary anymore.
+  * debian/ruby-tests.rake: skip a test that requires loading via bundler
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 16 Jul 2020 11:07:06 -0300
+
+rubocop (0.80.1+dfsg-4) unstable; urgency=medium
+
+  * Team upload.
+  * d/ruby-tests.rake: Set LANG to C.UTF-8 to fix issue with reproducibility.
+
+ -- Daniel Leidert <dleidert@debian.org>  Sat, 18 Apr 2020 00:51:30 +0200
+
+rubocop (0.80.1+dfsg-3) unstable; urgency=medium
+
+  * Team upload.
+  * d/control (Build-Depends): Remove ruby-rubocop-performance.
+  * d/patches/07-skip-tests-requiring-rubocop-performance.diff: Add patch.
+    - Skip tests which require rubocop-performance to not create a circular
+      build-dependency to ruby-rubocop-performance build.
+  * d/patches/series: Enable new patch.
+
+ -- Daniel Leidert <dleidert@debian.org>  Fri, 17 Apr 2020 15:37:46 +0200
+
+rubocop (0.80.1+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  * d/patches/06-Require-rexml-only-for-ruby2.7.patch: Add new patch.
+    - Only add dependency on rexml for Ruby2.7. libruby2.5 doesn't ship a
+      gemspec leading to autopkgtest failing in testing.
+  * d/patches/series: Enable new patch.
+
+ -- Daniel Leidert <dleidert@debian.org>  Sun, 12 Apr 2020 22:40:04 +0200
+
+rubocop (0.80.1+dfsg-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 0.80.1+dfsg
+  * Refresh packaging files with dh-make-ruby
+  * Refresh patches; drop patches applied upstream
+  * debian/rules: ignore dependency on ruby-rexml as it is provided by the
+    interpreter.
+  * Build-Depends: add required version of rubocop-peformance
+  * gemspec: add patch to fix file list
+  * Fix missing rubocop executable
+  * debian/ruby-tests.rake: exclude 2 files (out of 497) under autopkgtest.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 26 Mar 2020 08:04:00 -0300
+
+rubocop (0.74.0+dfsg-1) experimental; urgency=medium
+
+  * Team upload
+
+  [ Utkarsh Gupta ]
+  * Add salsa-ci.yml
+
+  [ Pirate Praveen ]
+  * Fix filename in watch file
+  * New upstream version 0.69.0+dfsg
+  * Bump Standards-Version to 4.5.0 (no changes needed)
+  * Drop compat file, rely on debhelper-compat and bump compat level to 12
+  * Use salsa.debian.org in Vcs-* fields
+  * Add ruby-jaro-winkler as dependency
+  * Tighten dependencies
+  * Relax jaro_winkler dependency in gemspec
+  * Add ruby-rubocop-performance as build dependency
+  * Add ruby-rack as build dependency
+  * Add some ruby 2.7 compat patches
+  * New upstream version 0.74.0+dfsg (Closes: #941331)
+  * Use gem-install layout and disable tests failing with ruby 2.7
+
+ -- Pirate Praveen <praveen@debian.org>  Tue, 10 Mar 2020 22:08:10 +0530
+
+rubocop (0.52.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 0.52.1+dfsg
+    + Fix FTBFS, support for Ruby 2.5 added upstream (Closes: #888185)
+  * d/compat: Bump compat version to 11
+  * d/control:
+    + Bump to Standards-Version 4.1.3 (no changes needed)
+    + Added pry and rubocop-rspec to build-deps
+  * d/patches:
+    + Refresh Debian patches (new upstream)
+    + Update series (patch-file-present-but-not-mentioned-in-series)
+
+ -- Sebastien Badia <sbadia@debian.org>  Sat, 10 Feb 2018 18:22:05 +0100
+
+rubocop (0.51.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches:
+    - d/p/01-relax-dependency-version.diff
+    - d/p/02-disable-tests-relying-on-rubygems-features.diff
+  * Bump Standards-Version to 4.1.1. No changes were required.
+  * Add Rules-Requires-Root: no.
+  * Update copyright info.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Mon, 30 Oct 2017 19:44:17 +0000
+
+rubocop (0.49.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream version 0.49.1+dfsg
+    CVE-2017-8418 fixed upstream (Closes: #870852)
+  * d/watch: Integrate orig.tarbal dfsg changes (for 'gbp import-orig --uscan')
+  * d/patches: Refresh patches according new upstream
+  * d/control:
+    + Use my Debian email address
+    + Added ruby-parallel as BD (new deps.)
+    + Added missing Testsuite flag
+    + Bump Standard-Version to 4.0.1 (no changes needed)
+
+ -- Sebastien Badia <sbadia@debian.org>  Wed, 23 Aug 2017 10:56:04 +0200
+
+rubocop (0.48.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Mon, 03 Apr 2017 23:12:00 +0100
+
+rubocop (0.48.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Sun, 26 Mar 2017 19:33:18 +0100
+
+rubocop (0.47.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #745423)
+  * Remove rubocop logo files from source since they are not DFSG compliant.
+  * Update watch file.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Mon, 13 Feb 2017 19:37:00 +0000
+
+rubocop (0.47.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+  * Add get-orig-source target to d/rules.
+  * Update dates in d/copyright file.
+  * Fix typo in d/patches/02-disable-tests-relying-on-rubygems-features.diff.
+  * Refresh patch d/patches/01-relax-ruby-progressbar-dependency-version.diff.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Mon, 16 Jan 2017 21:46:17 +0000
+
+rubocop (0.46.0-1) UNRELEASED; urgency=medium
+
+  * Initial release.
+
+ -- Miguel Landaeta <nomadium@debian.org>  Thu, 29 Dec 2016 21:42:07 +0000

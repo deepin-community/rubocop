@@ -1,0 +1,45 @@
+Source: rubocop
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Sebastien Badia <sbadia@debian.org>,
+           Miguel Landaeta <nomadium@debian.org>,
+           Utkarsh Gupta <utkarsh@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               gem2deb (>= 1),
+               rake,
+               pry,
+               ruby,
+               ruby-parallel,
+               ruby-progressbar,
+               ruby-rainbow,
+               ruby-regexp-parser (>= 1.7),
+               ruby-rspec,
+               ruby-rubocop-ast (<< 1.0),
+               ruby-rubocop-ast (>= 0.5.0),
+               ruby-rubocop-rspec,
+               ruby-simplecov,
+               ruby-unicode-display-width (>= 1.4.0),
+               ruby-webmock,
+               ruby-whitequark-parser (>= 2.7.1.1)
+Standards-Version: 4.5.0
+Vcs-Git: https://salsa.debian.org/ruby-team/rubocop.git
+Vcs-Browser: https://salsa.debian.org/ruby-team/rubocop
+Homepage: https://github.com/rubocop-hq/rubocop
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
+
+Package: rubocop
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${misc:Depends}, ${ruby:Depends}, ${shlibs:Depends}
+Description: Ruby static code analyzer
+ rubocop is a static code analyzer for Ruby, out of the box it will
+ enforce many of the guidelines outlined in the community Ruby Style Guide.
+ .
+ Most aspects of its behavior can be tweaked via various configuration
+ options.
+ .
+ Apart from reporting problems in your code, RuboCop can also
+ automatically fix some of the problems for you.

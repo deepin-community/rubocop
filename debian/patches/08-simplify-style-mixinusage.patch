@@ -1,0 +1,84 @@
+From: Marc-Andre Lafortune <github@marc-andre.ca>
+Date: Thu, 24 Sep 2020 14:56:23 -0400
+Subject: Simplify `Style/MixinUsage` and don't depend on broken `Node#macro?`
+
+Bump `rubocop/ast` requirement.
+See https://github.com/rubocop-hq/rubocop/issues/8765
+
+Part of 0.92.0 release
+
+Origin: https://github.com/rubocop/rubocop/commit/b1e1829d7ae2ecac674b75552a5e9c774eee5e0a.patch
+Origin: https://github.com/rubocop/rubocop/commit/69370a81496f775ad785b6887ee85708b9a1a47c.patch
+Bug-Debian: https://ci.debian.net/data/autopkgtest/testing/amd64/r/rubocop/17396170/log.gz
+Forwarded: not-needed
+---
+ lib/rubocop/cop/style/mixin_usage.rb | 34 +++++++---------------------------
+ rubocop.gemspec                      |  2 +-
+ 2 files changed, 8 insertions(+), 28 deletions(-)
+
+diff --git a/lib/rubocop/cop/style/mixin_usage.rb b/lib/rubocop/cop/style/mixin_usage.rb
+index b6cbed6..da5d5b3 100644
+--- a/lib/rubocop/cop/style/mixin_usage.rb
++++ b/lib/rubocop/cop/style/mixin_usage.rb
+@@ -49,41 +49,21 @@ module RuboCop
+             const)
+         PATTERN
+ 
+-        def_node_matcher :wrapped_macro_scope?, <<~PATTERN
+-          {({sclass class module block} ... ({begin if} ...))}
++        def_node_matcher :in_top_level_scope?, <<~PATTERN
++          {
++            root?                        # either at the top level
++            ^[  {kwbegin begin if def}   # or wrapped within one of these
++                #in_top_level_scope? ]   # that is in top level scope
++          }
+         PATTERN
+ 
+         def on_send(node)
+           include_statement(node) do |statement|
+-            return if node.argument? ||
+-                      accepted_include?(node) ||
+-                      belongs_to_class_or_module?(node)
++            return unless in_top_level_scope?(node)
+ 
+             add_offense(node, message: format(MSG, statement: statement))
+           end
+         end
+-
+-        private
+-
+-        def accepted_include?(node)
+-          node.parent && (node.macro? || ascend_macro_scope?(node.parent))
+-        end
+-
+-        def ascend_macro_scope?(ancestor)
+-          return true if wrapped_macro_scope?(ancestor)
+-
+-          ancestor.parent && ascend_macro_scope?(ancestor.parent)
+-        end
+-
+-        def belongs_to_class_or_module?(node)
+-          if !node.parent
+-            false
+-          else
+-            return true if node.parent.class_type? || node.parent.module_type?
+-
+-            belongs_to_class_or_module?(node.parent)
+-          end
+-        end
+       end
+     end
+   end
+diff --git a/rubocop.gemspec b/rubocop.gemspec
+index d651113..ddb6bfd 100644
+--- a/rubocop.gemspec
++++ b/rubocop.gemspec
+@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
+   s.add_runtime_dependency('rainbow', '>= 2.2.2', '< 4.0')
+   s.add_runtime_dependency('regexp_parser', '>= 1.7')
+   s.add_runtime_dependency('rexml')
+-  s.add_runtime_dependency('rubocop-ast', '>= 0.3.0', '< 1.0')
++  s.add_runtime_dependency('rubocop-ast', '>= 0.5.0', '< 1.0')
+   s.add_runtime_dependency('ruby-progressbar', '~> 1.7')
+   s.add_runtime_dependency('unicode-display_width', '>= 1.4.0', '< 2.0')
+ 

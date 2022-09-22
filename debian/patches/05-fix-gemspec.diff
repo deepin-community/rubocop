@@ -1,0 +1,20 @@
+From: Antonio Terceiro <terceiro@debian.org>
+Date: Wed, 25 Mar 2020 20:43:50 -0300
+Subject: Fix file list and remove git usage
+
+---
+ rubocop.gemspec | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+--- a/rubocop.gemspec
++++ b/rubocop.gemspec
+@@ -16,8 +16,7 @@ Gem::Specification.new do |s|
+   DESCRIPTION
+ 
+   s.email = 'rubocop@googlegroups.com'
+-  s.files = `git ls-files assets bin config lib LICENSE.txt README.md`
+-            .split($RS)
++  s.files = Dir['{assets,config,lib,exe}/**/*']
+   s.bindir = 'exe'
+   s.executables = ['rubocop']
+   s.extra_rdoc_files = ['LICENSE.txt', 'README.md']

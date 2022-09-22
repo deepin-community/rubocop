@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+export GEM2DEB_TEST_RUNNER = --check-dependencies
+export DH_RUBY = --gem-install
+
+%:
+	dh $@ --buildsystem=ruby --with ruby
+
+override_dh_gencontrol:
+	# rexml is provided by the ruby interpreter already, we don't need a
+	# dependency on ruby-rexml.
+	sed -i -e 's/ruby-rexml//' debian/*.substvars
+	dh_gencontrol

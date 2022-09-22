@@ -1,0 +1,6 @@
+02-disable-tests-relying-on-rubygems-features.diff
+04-adjust-tests-due-to-rubocop-logo-removal-from-package.diff
+05-fix-gemspec.diff
+07-skip-tests-requiring-rubocop-performance.diff
+08-simplify-style-mixinusage.patch
+09-skip-failing-test.patch

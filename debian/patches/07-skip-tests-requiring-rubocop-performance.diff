@@ -1,0 +1,25 @@
+From: Daniel Leidert <dleidert@debian.org>
+Date: Fri, 17 Apr 2020 15:46:34 +0200
+Subject: Skip tests requiring rubocop-performance
+
+---
+ spec/rubocop/cop/generator_spec.rb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/spec/rubocop/cop/generator_spec.rb
++++ b/spec/rubocop/cop/generator_spec.rb
+@@ -337,12 +337,12 @@ RSpec.describe RuboCop::Cop::Generator d
+     let(:options) { { formatters: [] } }
+     let(:runner) { RuboCop::Runner.new(options, config) }
+ 
+-    it 'generates a cop file that has no offense' do
++    xit 'generates a cop file that has no offense' do
+       generator.write_source
+       expect(runner.run([])).to be true
+     end
+ 
+-    it 'generates a spec file that has no offense' do
++    xit 'generates a spec file that has no offense' do
+       generator.write_spec
+       expect(runner.run([])).to be true
+     end
